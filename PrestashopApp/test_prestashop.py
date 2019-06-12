@@ -17,12 +17,7 @@ def test_home_page(prestashop_app):
 
 def test_user_login(prestashop_app):
     login_page = prestashop_app.go_to_login_page()
-    login_page.input_email.send_keys(EMAIL)
-    login_page.input_password.send_keys(PASSWORD)
-    login_page.button_submit.click()
+    home_page_logged_in = login_page.log_in_using_credentials(EMAIL, PASSWORD)
+    assert home_page_logged_in is not None
 
-    # TODO:
-    # home_page_logged_in = login_page.log_in_using_credentials(EMAIL, PASSWORD)
-    # assert home_page_logged_in.is_open()
-
-    time.sleep(10)
+    time.sleep(3)

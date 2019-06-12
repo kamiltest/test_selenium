@@ -3,6 +3,8 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from pages.home_page_user_logged_in import HomePageUserLoggedIn
 from pages.page_base import PageBase
 
 
@@ -44,4 +46,14 @@ class LoginPage(PageBase):
             return False
 
     def log_in_using_credentials(self, email, password):
-        raise NotImplementedError
+        self.input_email.send_keys(email)
+        self.input_password.send_keys(password)
+        self.button_submit.click()
+
+        home_page_user_logged_in = HomePageUserLoggedIn(self.driver)
+
+        # return home_page_user_logged_in if home_page_user_logged_in.is_open() else None
+        if home_page_user_logged_in.is_open() is True:
+            return home_page_user_logged_in
+        else:
+            return None
