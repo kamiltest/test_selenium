@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 from pages.page_base import PageBase
 
 
@@ -19,3 +18,9 @@ class HomePageUserLoggedIn(PageBase):
         except Exception as e:
             print(e)
             return False
+
+    def sign_out(self):
+        self.button_sign_out.click()
+        from pages.home_page import HomePage
+        home_page = HomePage(self.driver)
+        return home_page if home_page.is_open() else None
